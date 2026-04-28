@@ -2,6 +2,11 @@
 import "@styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Sidebar from "@components/Sidebar.svelte";
+import { intersection } from "astro:schema";
+
+interface Props {
+	page: string;
+}
 
 const { page } = Astro.props;
 ---

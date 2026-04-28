@@ -1,6 +1,6 @@
 <script lang="ts">
 
-    import { ROUTES } from '../core/utils/router';
+    import { ROUTES } from '@utils/router.ts';
 
     let { activePage } = $props();
 
