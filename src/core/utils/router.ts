@@ -4,7 +4,7 @@ export const ROUTES = [
         name: "Panel",
         public: false,
     },
-    
+
     {
         path: "/auth/login",
         name: "Iniciar sesion",
