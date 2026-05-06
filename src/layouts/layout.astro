@@ -2,8 +2,6 @@
 import "@styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Sidebar from "@components/Sidebar.svelte";
-import { intersection } from "astro:schema";
-import { setTheme } from "@core/utils/setup";
 
 interface Props {
 	page: string;
@@ -22,7 +20,7 @@ const { page } = Astro.props;
         <ClientRouter />
 		<title>Sistema Inventario | {page}</title>
 	</head>
-	<body class="bg-gray-200 dark:bg-gray-900">
+	<body class="bg-gray-200 dark:bg-gray-900 transition-colors duration-300">
         <div class="flex h-screen overflow-hidden">
             <Sidebar client:load activePage={page?.toLowerCase} />
 
