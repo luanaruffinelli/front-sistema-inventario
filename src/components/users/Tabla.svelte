@@ -16,7 +16,7 @@
 <table class="flex-1 width-100">
     <thead>
         <tr>
-            <th class="">Usuario</th>
+            <th class="">Nombre completo</th>
             <th class="">Email</th>
             <th class="">Acciones</th>
         </tr>
@@ -25,7 +25,7 @@
     <tbody>
         {#each userModel.users as user}
             <tr>
-                <td class="">{user.username}</td>
+                <td class="">{user.fullName}</td>
                 <td class="">{user.email}</td>
                 <td class="">
                     <div class="flex justify-center gap-2">
