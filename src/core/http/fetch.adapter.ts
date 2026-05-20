@@ -1,4 +1,4 @@
-import { HttpAdapter } from './http.adapter';
+import { HttpAdapter } from '@core/http/http.adapter';
 
 /**
  * Endpoints que NO requieren Authorization header
@@ -44,7 +44,7 @@ export class FetchAdapter implements HttpAdapter {
     const response = await fetch(url, {
       method,
       headers,
-      credentials: 'include', // 🔥 CLAVE PARA COOKIES
+      // credentials: 'include', // 🔥 CLAVE PARA COOKIES
       body: body ? JSON.stringify(body) : undefined,
     });
 

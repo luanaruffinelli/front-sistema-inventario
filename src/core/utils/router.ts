@@ -4,16 +4,14 @@ export const ROUTES = [
         name: "Panel",
         public: false,
     },
-
     {
         path: "/auth/login",
-        name: "Iniciar sesion",
+        name: "Iniciar Sesion",
         public: true,
     },
-
     {
         path: "/users",
         name: "Usuarios",
-        public: false,
-    },
-];
+        public: false
+    }
+]

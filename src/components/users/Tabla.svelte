@@ -1,50 +1,54 @@
 <script lang="ts">
     import Delete from "./Delete.svelte";
     import Edit from "./Edit.svelte";
+    import Create from "./Create.svelte";
     import { userModel } from "./user.svelte";
     import { onMount } from "svelte";
-
 
     onMount(async () => {
         await userModel.getUsers();
     });
 </script>
 
-<Delete { userModel } />
-<Edit { userModel } />
+<Delete {userModel} />
+<Edit {userModel} />
+<Create {userModel} />
 
-<table class="flex-1 width-100">
+<div class="w-full flex justify-end mb-4">
+    <button class="bg-green-500 text-black text-xl px-2 py-1 text-md rounded-md dark:text-white" onclick={() => userModel.showAddModal()}>
+        +
+    </button>
+</div>
+
+<table class="flex-1 w-full">
     <thead>
         <tr>
-            <th class="">Nombre completo</th>
-            <th class="">Email</th>
-            <th class="">Acciones</th>
+            <th class="bg-gray-800 text-white text-left p-2">Nombre</th>
+            <th class="bg-gray-800 text-white text-left p-2">Email</th>
+            <th class="bg-gray-800 text-white p-2">Acciones</th>
         </tr>
     </thead>
-
     <tbody>
         {#each userModel.users as user}
-            <tr>
-                <td class="">{user.fullName}</td>
-                <td class="">{user.email}</td>
-                <td class="">
+            <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
+                <td class="px-2 py-1">{user.fullName}</td>
+                <td class="px-2 py-1">{user.email}</td>
+                <td class="px-2 py-1">
                     <div class="flex justify-center gap-2">
-                        <button 
-                            aria-label="Editar" 
+                        <button
                             onclick={() => userModel.showEditModal(user)}
-                            class="bg-gray-500 hover:bg-gray-600 dark:bg-gray-300 dark:hover:bg-gray-500  
-                            text-white font-bold py-2 px-4 rounded dark:bg-gray-700 dark:hover:bg-gray-600"
+                            aria-label="Editar"
+                            class="bg-gray-800 text-white px-4 rounded-md"
                         >
                             Editar
                         </button>
-                        <button 
-                            aria-label="Eliminar" 
+                        <button
                             onclick={() => userModel.showDeleteModal(user)}
-                                class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded 
-                                dark:bg-gray-800 dark:hover:bg-gray-600"
-                            >
-                                Eliminar
-                            </button>
+                            aria-label="Eliminar"
+                            class="bg-red-500 text-white px-4 rounded-md"
+                        >
+                            Eliminar
+                        </button>
                     </div>
                 </td>
             </tr>
