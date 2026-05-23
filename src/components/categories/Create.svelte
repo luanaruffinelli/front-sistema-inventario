@@ -26,7 +26,7 @@
                     />
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-bold">
+                    <label for="description" class="block text-sm font-bold">
                         Descripción:
                     </label>
                     <input

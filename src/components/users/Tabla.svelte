@@ -5,6 +5,8 @@
     import { userModel } from "./user.svelte";
     import { onMount } from "svelte";
 
+    import Icon from "@iconify/svelte";
+
     onMount(async () => {
         await userModel.getUsers();
     });
