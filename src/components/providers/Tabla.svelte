@@ -2,22 +2,20 @@
     import Delete from "./Delete.svelte";
     import Edit from "./Edit.svelte";
     import Create from "./Create.svelte";
-    import { userModel } from "./user.svelte";
+    import { providerModel } from "./provider.svelte";
     import { onMount } from "svelte";
 
-    import Icon from "@iconify/svelte";
-
     onMount(async () => {
-        await userModel.getUsers();
+        await providerModel.getProviders();
     });
 </script>
 
-<Delete {userModel} />
-<Edit {userModel} />
-<Create {userModel} />
+<Delete {providerModel} />
+<Edit {providerModel} />
+<Create {providerModel} />
 
 <div class="w-full flex justify-end mb-4">
-    <button class="bg-green-500 text-black text-xl px-2 py-1 text-md rounded-md dark:text-white cursor-pointer" on:click={() => userModel.showAddModal()}>
+    <button class="bg-gray-800 text-xl text-white px-2 py-1 rounded-md border border-white cursor-pointer" onclick={() => providerModel.showCreateModal()}>
         +
     </button>
 </div>
@@ -26,26 +24,24 @@
     <thead>
         <tr>
             <th class="bg-gray-800 text-white text-left p-2">Nombre</th>
-            <th class="bg-gray-800 text-white text-left p-2">Email</th>
             <th class="bg-gray-800 text-white p-2">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        {#each userModel.users as user}
+        {#each providerModel.providers as provider}
             <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-                <td class="px-2 py-1">{user.fullName}</td>
-                <td class="px-2 py-1">{user.email}</td>
+                <td class="px-2 py-1">{provider.name}</td>
                 <td class="px-2 py-1">
                     <div class="flex justify-center gap-2">
                         <button
-                            on:click={() => userModel.showEditModal(user)}
+                            onclick={() => providerModel.showEditModal(provider)}
                             aria-label="Editar"
                             class="bg-gray-800 text-white px-4 rounded-md cursor-pointer"
                         >
                             Editar
                         </button>
                         <button
-                            on:click={() => userModel.showDeleteModal(user)}
+                            onclick={() => providerModel.showDeleteModal(provider)}
                             aria-label="Eliminar"
                             class="bg-red-500 text-white px-4 rounded-md cursor-pointer"
                         >

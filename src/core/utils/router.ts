@@ -22,6 +22,18 @@ export const ROUTES = [
         icon: "tabler:tag",
         name: "Categorías",
         public: false
+    },
+    {
+        path: "/products",
+        icon: "fluent-mdl2:product",
+        name: "Productos",
+        public: false
+    },
+    {
+        path: "/providers",
+        icon: "mdi:truck-outline",
+        name: "Proveedores",
+        public: false
     }
     
 ]

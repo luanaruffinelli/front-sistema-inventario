@@ -16,7 +16,7 @@
 
 <div class="w-full flex justify-end mb-4">
     <button
-        class="bg-green-500 text-black text-xl px-2 py-1 text-md rounded-md dark:text-white"
+        class="bg-gray-800 text-xl text-white px-2 py-1 rounded-md border border-white cursor-pointer"
         onclick={() => categoryModel.showAddModal()}
     >
         +

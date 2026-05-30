@@ -32,7 +32,8 @@ class UserModel {
         this.getUsers();
         this.editDialog = false;
     }
-    async createUser(e: Event) {
+    
+        async createUser(e: Event) {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const data = Object.fromEntries(formData);
@@ -42,7 +43,7 @@ class UserModel {
     }
 
     showEditModal(user: User) {
-        this.user = user;
+        this.user = null;
         this.editDialog = true;
     }
 

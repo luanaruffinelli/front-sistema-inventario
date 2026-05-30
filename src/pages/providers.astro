@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/layout.astro";
+import Table from "@components/providers/Tabla.svelte";
+
+import Icon from "@iconify/svelte";
+---
+
+<Layout page="Proveedores">
+    <h1 class="text-2xl font-bold mb-4">Proveedores</h1>
+
+    <Table client:visible />
+</Layout>
