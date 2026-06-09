@@ -33,7 +33,7 @@
     <tbody>
         {#each userModel.users as user}
             <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
-                <td class="px-2 py-1">{user.fullName}</td>
+                <td class="px-2 py-1">{user.fullname}</td>
                 <td class="px-2 py-1">{user.email}</td>
                 <td class="px-2 py-1">
                     <div class="flex justify-center gap-2">

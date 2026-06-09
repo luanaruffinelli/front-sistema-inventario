@@ -13,15 +13,15 @@
                 <hr />
 
                 <div class="p-2 flex flex-col">
-                    <label for="fullName" class="block text-sm font-bold"
+                    <label for="fullname" class="block text-sm font-bold"
                         >Nombre Completo:</label
                     >
                     <input
                         class="border border-gray-400 rounded-md p-2"
                         placeholder="Ingrese el nombre completo"
                         type="text"
-                        id={`fullName-${id}`}
-                        name="fullName"
+                        id={`fullname-${id}`}
+                        name="fullname"
                     />
                 </div>
                 <div class="p-2 flex flex-col">
@@ -47,6 +47,13 @@
                         id={`password-${id}`}
                         name="password"
                     />
+                </div>
+                <div>
+                    {#if userModel.errorMessage}
+                        <p class="text-red-500 text-sm">
+                            {userModel.errorMessage}
+                        </p>
+                    {/if}
                 </div>
 
                 <div class="p-2 flex justify-center gap-12 mt-3">

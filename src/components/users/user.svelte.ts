@@ -1,4 +1,5 @@
 import { http } from '@core/http';
+import { handleError } from '@core/utils/handle-error';
 
 interface User {
     id: number
@@ -12,6 +13,7 @@ class UserModel {
     deleteDialog = $state(false);
     editDialog = $state(false);
     createDialog = $state(false);
+    errorMessage = $state('');
 
     async getUsers() {
         this.users = await http.get<User[]>(`${import.meta.env.PUBLIC_API_URL}/users`);
@@ -32,14 +34,19 @@ class UserModel {
         this.getUsers();
         this.editDialog = false;
     }
-    
-        async createUser(e: Event) {
-        e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        const data = Object.fromEntries(formData);
-        await http.post<User>(`${import.meta.env.PUBLIC_API_URL}/users`, data);
-        this.getUsers();
-        this.createDialog = false;
+
+    async createUser(e: Event) {
+        try {
+            e.preventDefault();
+            const formData = new FormData(e.target as HTMLFormElement);
+            const data = Object.fromEntries(formData);
+            await http.post<User>(`${import.meta.env.PUBLIC_API_URL}/users`, data);
+            this.getUsers();
+            this.createDialog = false;
+        } catch (error) {
+            this.errorMessage = handleError(error);
+            console.error('Error creating user:', error);
+        }
     }
 
     showEditModal(user: User) {
