@@ -9,7 +9,7 @@
     >
         <div class="bg-white rounded-md p-4 w-96">
             <form onsubmit={(e) => categoryModel.createCategory(e)}>
-                <h2 class="text-lg font-bold">Crear Categoría</h2>
+                <h2 class="text-lg font-bold">Crear Categoria</h2>
                 <hr />
 
                 <div class="p-2 flex flex-col">
@@ -18,24 +18,10 @@
                     >
                     <input
                         class="border border-gray-400 rounded-md p-2"
-                        placeholder="Ingrese el nombre de la categoría"
+                        placeholder="Ingrese el nombre"
                         type="text"
                         id={`name-${id}`}
                         name="name"
-                        value={categoryModel.category.name}
-                    />
-                </div>
-                <div>
-                    <label for="description" class="block text-sm font-bold">
-                        Descripción:
-                    </label>
-                    <input
-                        class="border border-gray-400 rounded-md p-2"
-                        placeholder="Ingrese la descripción de la categoría:"
-                        type="text"
-                        id={`description-${id}`}
-                        name="description"
-                        value={categoryModel.category.description}
                     />
                 </div>
 

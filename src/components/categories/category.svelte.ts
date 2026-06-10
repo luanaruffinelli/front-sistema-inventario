@@ -1,9 +1,8 @@
-import { http } from '@core/http';
+import { http } from "@core/http"
 
-interface Category {
+export interface Category {
     id: number
     name: string
-    description: string
 }
 
 class CategoryModel {
@@ -32,6 +31,7 @@ class CategoryModel {
         this.getCategories();
         this.editDialog = false;
     }
+
     async createCategory(e: Event) {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -39,6 +39,11 @@ class CategoryModel {
         await http.post<Category>(`${import.meta.env.PUBLIC_API_URL}/categories`, data);
         this.getCategories();
         this.createDialog = false;
+    }
+
+    showCreateModal() {
+        this.category = null;
+        this.createDialog = true;
     }
 
     showEditModal(category: Category) {
@@ -50,12 +55,6 @@ class CategoryModel {
         this.category = category;
         this.deleteDialog = true;
     }
-
-    showAddModal() {
-        this.category = null;
-        this.createDialog = true;
-    }
 }
 
 export const categoryModel = new CategoryModel();
-

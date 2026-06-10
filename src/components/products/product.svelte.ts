@@ -1,16 +1,20 @@
-import { http } from '@core/http';
+import { type Category } from "@components/categories/category.svelte"
+import { http } from "@core/http"
 
 interface Product {
     id: number
     name: string
-    description: string
-    price: number
+    priceUnit: number
+    stock: number
     categoryId: number
+    category: Category
 }
 
 class ProductModel {
     product = $state<Product | null>(null)
     products = $state<Product[]>([])
+    categories = $state<Category[]>([])
+
     deleteDialog = $state(false);
     editDialog = $state(false);
     createDialog = $state(false);
@@ -57,6 +61,13 @@ class ProductModel {
     showDeleteModal(product: Product) {
         this.product = product;
         this.deleteDialog = true;
+    }
+
+    formatPriceUnit(priceUnit: number) {
+        return new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+        }).format(priceUnit);
     }
 }
 

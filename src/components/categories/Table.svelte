@@ -15,11 +15,8 @@
 <Create {categoryModel} />
 
 <div class="w-full flex justify-end mb-4">
-    <button
-        class="bg-gray-800 text-xl text-white px-2 py-1 rounded-md border border-white cursor-pointer"
-        onclick={() => categoryModel.showAddModal()}
-    >
-        +
+    <button class="bg-gray-800 text-xl text-white px-2 py-1 rounded-md border border-white" onclick={() => categoryModel.showCreateModal()}>
+        Nueva Categoría
     </button>
 </div>
 
@@ -27,7 +24,6 @@
     <thead>
         <tr>
             <th class="bg-gray-800 text-white text-left p-2">Nombre</th>
-            <th class="bg-gray-800 text-white text-left p-2">Descripción</th>
             <th class="bg-gray-800 text-white p-2">Acciones</th>
         </tr>
     </thead>
@@ -35,20 +31,17 @@
         {#each categoryModel.categories as category}
             <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
                 <td class="px-2 py-1">{category.name}</td>
-                <td class="px-2 py-1">{category.description}</td>
                 <td class="px-2 py-1">
                     <div class="flex justify-center gap-2">
                         <button
-                            onclick={() =>
-                                categoryModel.showEditModal(category)}
+                            onclick={() => categoryModel.showEditModal(category)}
                             aria-label="Editar"
                             class="bg-gray-800 text-white px-4 rounded-md"
                         >
                             Editar
                         </button>
                         <button
-                            onclick={() =>
-                                categoryModel.showDeleteModal(category)}
+                            onclick={() => categoryModel.showDeleteModal(category)}
                             aria-label="Eliminar"
                             class="bg-red-500 text-white px-4 rounded-md"
                         >

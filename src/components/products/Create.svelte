@@ -1,13 +1,8 @@
 <script lang="ts">
     import { categoryModel } from "@components/categories/category.svelte";
-    import { onMount } from "svelte";
-
+    
     let { productModel } = $props();
     let id = $props.id();
-
-    onMount(async () => {
-        await categoryModel.getCategories();
-    });
 </script>
 
 {#if productModel.createDialog}

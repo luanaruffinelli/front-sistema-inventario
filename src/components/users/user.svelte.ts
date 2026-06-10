@@ -2,9 +2,9 @@ import { http } from '@core/http';
 import { handleError } from '@core/utils/handle-error';
 
 interface User {
-    id: number
-    fullName: string
-    email: string
+    fullname: string;
+    id: number;
+    email: string;
 }
 
 class UserModel {
