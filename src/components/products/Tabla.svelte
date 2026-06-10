@@ -1,74 +1,63 @@
-import { type Category } from "@components/categories/category.svelte"
-import { http } from "@core/http"
+<script lang="ts">
+    import Delete from "./Delete.svelte";
+    import Edit from "./Edit.svelte";
+    import Create from "./Create.svelte";
+    import { productModel } from "./product.svelte";
+    import { onMount } from "svelte";
+    import { categoryModel } from "@components/categories/category.svelte";
 
-interface Product {
-    id: number
-    name: string
-    priceUnit: number
-    stock: number
-    categoryId: number
-    category: Category
-}
+    onMount(async () => {
+        await productModel.getProducts();
+        await categoryModel.getCategories();
+    });
+</script>
 
-class ProductModel {
-    product = $state<Product | null>(null)
-    products = $state<Product[]>([])
-    categories = $state<Category[]>([])
+<Delete {productModel} />
+<Edit {productModel} />
+<Create {productModel} />
 
-    deleteDialog = $state(false);
-    editDialog = $state(false);
-    createDialog = $state(false);
+<div class="w-full flex justify-end mb-4">
+    <button class="bg-gray-800 text-xl text-white px-2 py-1 rounded-md border border-white" onclick={() => productModel.showCreateModal()}>
+        Nuevo Producto
+    </button>
+</div>
 
-    async getProducts() {
-        this.products = await http.get<Product[]>(`${import.meta.env.PUBLIC_API_URL}/products`);
-    }
-
-    async deleteProduct(id: number) {
-        await http.delete<Product>(`${import.meta.env.PUBLIC_API_URL}/products/${id}`);
-        this.getProducts();
-        this.deleteDialog = false;
-    }
-
-    async editProduct(id: number, e: Event) {
-        e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        const data = Object.fromEntries(formData);
-
-        await http.patch<Product>(`${import.meta.env.PUBLIC_API_URL}/products/${id}`, data);
-        this.getProducts();
-        this.editDialog = false;
-    }
-
-    async createProduct(e: Event) {
-        e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        const data = Object.fromEntries(formData);
-        await http.post<Product>(`${import.meta.env.PUBLIC_API_URL}/products`, data);
-        this.getProducts();
-        this.createDialog = false;
-    }
-
-    showCreateModal() {
-        this.product = null;
-        this.createDialog = true;
-    }
-
-    showEditModal(product: Product) {
-        this.product = product;
-        this.editDialog = true;
-    }
-
-    showDeleteModal(product: Product) {
-        this.product = product;
-        this.deleteDialog = true;
-    }
-
-    formatPriceUnit(priceUnit: number) {
-        return new Intl.NumberFormat('es-AR', {
-            style: 'currency',
-            currency: 'ARS',
-        }).format(priceUnit);
-    }
-}
-
-export const productModel = new ProductModel();
+<table class="flex-1 w-full">
+    <thead>
+        <tr>
+            <th class="bg-gray-800 text-white text-left p-2">Nombre</th>
+            <th class="bg-gray-800 text-white text-left p-2">Stock</th>
+            <th class="bg-gray-800 text-white text-left p-2">Precio Unitario</th>
+            <th class="bg-gray-800 text-white text-left p-2">Categoria</th>
+            <th class="bg-gray-800 text-white p-2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each productModel.products as product}
+            <tr class="odd:bg-gray-100 dark:odd:bg-gray-700">
+                <td class="px-2 py-1">{product.name}</td>
+                <td class="px-2 py-1">{product.stock}</td>
+                <td class="px-2 py-1">{productModel.formatPriceUnit(product.priceUnit)}</td>
+                <td class="px-2 py-1">{product.category.name}</td>
+                <td class="px-2 py-1">
+                    <div class="flex justify-center gap-2">
+                        <button
+                            onclick={() => productModel.showEditModal(product)}
+                            aria-label="Editar"
+                            class="bg-gray-800 text-white px-4 rounded-md"
+                        >
+                            Editar
+                        </button>
+                        <button
+                            onclick={() => productModel.showDeleteModal(product)}
+                            aria-label="Eliminar"
+                            class="bg-red-500 text-white px-4 rounded-md"
+                        >
+                            Eliminar
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        {/each}
+    </tbody>
+</table>
